@@ -2,7 +2,8 @@
 Easily view important debugging information for a namespace over multiple environments.
 
 ## Installation
-- [Install](https://crystal-lang.org/docs/installation/on_mac_osx_using_homebrew.html) Crystal Lang
+- $ brew update
+- $ brew install crystal-lang
 - $ make update
 
 ## Use
