@@ -2,8 +2,8 @@
 Easily view important namespace info over multiple environments
 
 ## Installation
-Install Crystal Lang
-$ make update
+- Install Crystal Lang
+- $ make update
 
 ## Use
-$ kuve <namespace_of_choice>
+- $ kuve <namespace_of_choice>
