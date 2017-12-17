@@ -4,6 +4,7 @@ Easily view important debugging information for a namespace over multiple enviro
 ## Installation
 - $ brew update
 - $ brew install crystal-lang
+- $ cd kuve
 - $ make update
 
 ## Use
