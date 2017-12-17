@@ -30,8 +30,8 @@ class Runner
     deployment_json = `kubectl get events -o=json #{namespace}`
     deployment = JSON.parse(deployment_json)
     deployment["items"].each do |item|
-      if item["type"] == "Warning"
-        puts "!!!!!!!!  WARNING EVENT !!!!!!!!"
+      if item["type"] == "Warning" || item["type"] == "Error"
+        puts "!!!!!!!!  #{item["type"]} EVENT !!!!!!!!"
         puts "Count: #{item["count"]}"
         puts "Message: #{item["message"]}"
         puts "Source: #{item["source"]["component"]}"
