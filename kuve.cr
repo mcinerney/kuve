@@ -10,14 +10,17 @@ class Runner
   end
 
   def contexts
-    [
-      "gcloud container clusters get-credentials poc-environment --zone us-west1-a --project poc-tier1",
-      "gcloud container clusters get-credentials integration-environment --zone us-west1-a --project integration-tier1",
-      "gcloud container clusters get-credentials staging-environment --zone us-west1-a --project staging-tier1",
-      "gcloud container clusters get-credentials sandbox-environment --zone us-west1-b --project sandbox-tier1",
-      "gcloud container clusters get-credentials performance-environment --zone us-west1-a --project performance-tier1",
-      "gcloud container clusters get-credentials production-environment --zone us-west1-a --project production-tier1",
-    ]
+    # [
+    #   "gcloud container clusters get-credentials poc-environment --zone us-west1-a --project poc-tier1",
+    #   "gcloud container clusters get-credentials integration-environment --zone us-west1-a --project integration-tier1",
+    #   "gcloud container clusters get-credentials staging-environment --zone us-west1-a --project staging-tier1",
+    #   "gcloud container clusters get-credentials sandbox-environment --zone us-west1-b --project sandbox-tier1",
+    #   "gcloud container clusters get-credentials performance-environment --zone us-west1-a --project performance-tier1",
+    #   "gcloud container clusters get-credentials production-environment --zone us-west1-a --project production-tier1",
+    # ]
+
+    # If no context flag is supplied just use default
+    JSON.parse(File.open("/usr/local/bin/kuve_conf"))["contexts"]["default"]
   end
 
   def get_deployed_sha
