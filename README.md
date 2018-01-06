@@ -7,11 +7,8 @@ Easily view important debugging information for a namespace over multiple enviro
 - $ cd kuve
 - $ make update
 
-### To view namespace info
-- $ kuve <namespace_of_choice>
-
-### To view node health
-- $ kuve nodes
+### List available commands
+- $ kuve -h
 
 ### Todo
 - Use multiple contexts
