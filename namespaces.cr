@@ -1,19 +1,24 @@
+# vim: set ts=2 sw=2 noet fileencoding=utf-8:
+
+require "colorize"
+
 class Namespace
+  class NamespacePodInformation
+    getter :ctx, :data
+
+    def initialize(@ctx : String, @data : String)
+    end
+  end
+
   def initialize
     @data = Array(String).new
   end
 
   def contexts
-    # If no context flag is supplied just use default
-    JSON.parse(File.open("/usr/local/bin/kuve_conf"))["contexts"]["default"]
+    JSON.parse(File.open("/usr/local/bin/kuve_conf"))["rawcontexts"]["default"].map { |value| value.to_s }
   end
 
-  def rawcontexts
-    # If no context flag is supplied just use default
-    JSON.parse(File.open("/usr/local/bin/kuve_conf"))["rawcontexts"]["default"]
-  end
-
-  def get_deployed_sha(context)
+  def get_deployed_image(context)
     deployment_json = `kubectl get deployment -o=json #{namespace} --context=#{context}`
     deployment = JSON.parse(deployment_json)
     deployment["items"].first["spec"]["template"]["spec"]["containers"].first["image"]
@@ -25,7 +30,7 @@ class Namespace
     str = String.build do |str|
       deployment["items"].each do |item|
         if item["type"] == "Warning" || item["type"] == "Error"
-          str << "!!!!!!!!  #{item["type"]} EVENT !!!!!!!!\n"
+          str << "!!!!!!!!  #{item["type"]} EVENT !!!!!!!!\n".colorize(:red)
           str << "Count: #{item["count"]}\n"
           str << "Message: #{item["message"]}\n"
           str << "Source: #{item["source"]["component"]}\n"
@@ -38,33 +43,47 @@ class Namespace
   end
 
   def get_all_pods_all_namespaces_all_envs
-    channel = Channel(String).new
+    channel = Channel(NamespacePodInformation).new
 
-    rawcontexts.each do |ctx|
+    contexts.each do |ctx|
       spawn do
         str = String.build do |str|
-          str << "---------------------------------------------- #{get_deployed_sha ctx} ----------------------------------------------\n\n"
+          image_info = get_deployed_image ctx
+          sha = image_info.to_s.split(":").last
+          @data << sha
+
+          str << "---------------------------------------------- #{image_info} ----------------------------------------------\n\n"
 
           output = IO::Memory.new
           Process.run "kubectl",
-            ["get", "pods", "-o", "wide", "#{namespace}", "--context", "#{ctx}"], output: output
+            ["get", "pods", "-o", "wide", "#{namespace}", "--context", ctx], output: output
           output.close
           str << output.to_s
 
-          @data << "#{get_deployed_sha(ctx).to_s.split(":").last}"
-          str << "\n\n"
-          str << get_events ctx
+          event_info = get_events ctx
+          if !event_info.empty?
+            str << "\n\n"
+            str << event_info
+          end
+
           str << "\n\n"
         end
 
         # send the results async to the receiver below
-        channel.send str
+        channel.send NamespacePodInformation.new ctx, str
       end
     end
 
-    # as each sub-task completes, output its results
+    # as each sub-task completes, collect its results and bucket by context
+    results = Hash(String, String).new
     contexts.each do
-      puts channel.receive
+      result = channel.receive
+      results[result.ctx] = result.data
+    end
+
+    # output the results by context, in order
+    contexts.each do |ctx|
+      puts results[ctx]
     end
 
     puts @data
