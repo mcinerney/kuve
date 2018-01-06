@@ -15,7 +15,7 @@ class Restarts
   def show_all_restarts(number)
     contexts.each do |con|
       `#{con} 2>&1 > /dev/null`
-      puts "----------------------- Checking Pod Restarts on Nodes: #{get_project_name(con)} -----------------------"
+      puts "-------------------- Checking Pod Restarts on Nodes and Namespaces: #{get_project_name(con)} --------------------"
       puts ""
       all_data = `kubectl get pods --all-namespaces -o=json`
       data = JSON.parse(all_data)
