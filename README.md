@@ -1,5 +1,18 @@
-## Kuve
-Easily view important debugging information for a namespace over multiple environments.
+```
+*****************************************************************
+
+      :::    :::      :::    :::    :::     :::       ::::::::::
+     :+:   :+:       :+:    :+:    :+:     :+:       :+:
+    +:+  +:+        +:+    +:+    +:+     +:+       +:+
+   +#++:++         +#+    +:+    +#+     +:+       +#++:++#
+  +#+  +#+        +#+    +#+     +#+   +#+        +#+
+ #+#   #+#       #+#    #+#      #+#+#+#         #+#
+###    ###       ########         ###           ##########
+
+*****************************************************************
+```
+
+Easily view important debugging information over multiple environments.
 
 ## Installation
 - $ brew update
@@ -12,6 +25,5 @@ Easily view important debugging information for a namespace over multiple enviro
 
 ### Todo
 - Use multiple contexts
-- Help Menu
 - Better Error Messages
 - More Functionality (Ideas/PR's Welcome)

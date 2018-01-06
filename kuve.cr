@@ -12,11 +12,31 @@ if ARGV[0] == "nodes"
   no.get_all_nodes
 elsif ARGV[0] == "restarts"
   a = Restarts.new
-  a.show_all_restarts
-elsif ARGV[0] == "-h"
-  puts "kuve <namespace> - shows all pods in a namespace for each project"
-  puts "kuve restarts - shows node and app restarts per project"
-  puts "kuve nodes - shows all warning and error messages for all nodes in a project"
+  if (ARGV.size > 1) && (ARGV[1] == "-a" || ARGV[1] == "a")
+    a.show_all_restarts("all")
+  else
+    a.show_all_restarts("top")
+  end
+elsif ARGV[0] == "-h" || ARGV[0] == "h"
+  puts ""
+  puts "*****************************************************************"
+  puts ""
+  puts "      :::    :::      :::    :::    :::     :::       ::::::::::"
+  puts "     :+:   :+:       :+:    :+:    :+:     :+:       :+:        "
+  puts "    +:+  +:+        +:+    +:+    +:+     +:+       +:+         "
+  puts "   +#++:++         +#+    +:+    +#+     +:+       +#++:++#     "
+  puts "  +#+  +#+        +#+    +#+     +#+   +#+        +#+           "
+  puts " #+#   #+#       #+#    #+#      #+#+#+#         #+#            "
+  puts "###    ###       ########         ###           ##########      "
+  puts ""
+  puts "*****************************************************************"
+  puts ""
+  puts "$ kuve <namespace>     shows all pods in a namespace for each project"
+  puts "$ kuve restarts        shows top six pod restarts in namespace and node"
+  puts "$ kuve restarts -a     shows all pod restarts in namespace and node"
+  puts "$ kuve nodes           shows all warning and error messages for all nodes in a project"
+  puts ""
+  puts ""
 else
   na = Namespace.new
   na.get_all_pods_all_namespaces_all_envs
