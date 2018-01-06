@@ -70,6 +70,7 @@ class Restarts
     app_data.map_with_index do |data, i|
       puts "#{data[0]} - #{data[1]}"
     end
+    puts ""
   end
 
   def print_all_node_data(node_data)
@@ -77,5 +78,6 @@ class Restarts
       "%*s" % [10, "foo"]
       puts "#{data[0]} - #{data[1]}"
     end
+    puts ""
   end
 end
