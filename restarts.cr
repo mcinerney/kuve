@@ -68,15 +68,15 @@ class Restarts
 
   def print_all_app_data(app_data)
     app_data.map_with_index do |data, i|
-      puts "#{data[0]} - #{data[1]}"
+      puts "%*s%*s%d" % [-53, "#{data[0]}", 5, "- ", data[1]]
     end
     puts ""
   end
 
   def print_all_node_data(node_data)
     node_data.map_with_index do |data, i|
-      "%*s" % [10, "foo"]
-      puts "#{data[0]} - #{data[1]}"
+      puts "%*s%*s%d" % [-53, "#{data[0]}", 5, "- ", data[1]]
+      # puts "#{data[0]} - #{data[1]}"
     end
     puts ""
   end
