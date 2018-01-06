@@ -5,7 +5,7 @@ class Restarts
 
   def contexts
     # If no context flag is supplied just use default
-    JSON.parse(File.open("/usr/local/bin/kuve_conf"))["contexts"]["default"]
+    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["contexts"]["default"]
   end
 
   def get_project_name(con)
