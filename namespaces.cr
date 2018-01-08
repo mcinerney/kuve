@@ -15,7 +15,7 @@ class Namespace
   end
 
   def contexts
-    JSON.parse(File.open("/usr/local/bin/kuve_conf"))["rawcontexts"]["default"].map { |value| value.to_s }
+    JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["rawcontexts"]["default"].map { |value| value.to_s }
   end
 
   def get_deployed_image(context)
