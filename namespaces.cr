@@ -48,11 +48,11 @@ class Namespace
     contexts.each do |ctx|
       spawn do
         str = String.build do |str|
-          image_info = get_deployed_image ctx
+          image_info = (get_deployed_image ctx).to_s
           sha = image_info.to_s.split(":").last
           @data << sha
 
-          str << "---------------------------------------------- #{image_info} ----------------------------------------------\n\n"
+          str << ("%*s%*s\n\n" % [60 + image_info.size / 2, image_info, 60 - image_info.size / 2, ""]).gsub(" ", "-")
 
           output = IO::Memory.new
           Process.run "kubectl",
