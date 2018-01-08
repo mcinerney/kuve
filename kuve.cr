@@ -1,6 +1,7 @@
 require "./namespaces.cr"
 require "./restarts.cr"
 require "./nodes.cr"
+require "colorize"
 require "json"
 
 # Have a command for a namespace
@@ -19,17 +20,17 @@ elsif ARGV[0] == "restarts"
   end
 elsif ARGV[0] == "-h" || ARGV[0] == "h"
   puts ""
-  puts "*****************************************************************"
+  puts "*****************************************************************".colorize.yellow
   puts ""
-  puts "      :::    :::      :::    :::    :::     :::       ::::::::::"
-  puts "     :+:   :+:       :+:    :+:    :+:     :+:       :+:        "
-  puts "    +:+  +:+        +:+    +:+    +:+     +:+       +:+         "
-  puts "   +#++:++         +#+    +:+    +#+     +:+       +#++:++#     "
-  puts "  +#+  +#+        +#+    +#+     +#+   +#+        +#+           "
-  puts " #+#   #+#       #+#    #+#      #+#+#+#         #+#            "
-  puts "###    ###       ########         ###           ##########      "
+  puts "      :::    :::      :::    :::    :::     :::       ::::::::::".colorize.light_yellow
+  puts "     :+:   :+:       :+:    :+:    :+:     :+:       :+:        ".colorize.light_yellow
+  puts "    +:+  +:+        +:+    +:+    +:+     +:+       +:+         ".colorize.light_yellow
+  puts "   +#++:++         +#+    +:+    +#+     +:+       +#++:++#     ".colorize.yellow
+  puts "  +#+  +#+        +#+    +#+     +#+   +#+        +#+           ".colorize.yellow
+  puts " #+#   #+#       #+#    #+#      #+#+#+#         #+#            ".colorize.light_yellow
+  puts "###    ###       ########         ###           ##########      ".colorize.light_yellow
   puts ""
-  puts "*****************************************************************"
+  puts "*****************************************************************".colorize.yellow
   puts ""
   puts "$ kuve <namespace>     shows all pods in a namespace for each project"
   puts "$ kuve restarts        shows top six pod restarts in namespace and node"
