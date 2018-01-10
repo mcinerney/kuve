@@ -26,7 +26,7 @@ class ProgressIndicator
       print "\b \b" # erase glyph
     end
 
-    printf "\033[2K" # erase line
+    print "\033[2K" # erase line
 
     @channel.send nil # signal stop that we're done
   end
