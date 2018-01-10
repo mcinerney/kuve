@@ -23,7 +23,7 @@ class ProgressIndicator
 
       print GLYPHS[@g_step].colorize(COLORS[@c_step])
       sleep 0.05
-      print "\b \b" # erase glyph
+      print "\b"
     end
 
     print "\033[2K" # erase line
