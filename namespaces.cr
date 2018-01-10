@@ -1,5 +1,6 @@
 # vim: set ts=2 sw=2 noet fileencoding=utf-8:
 
+require "./fancy.cr"
 require "colorize"
 
 class Namespace
@@ -52,6 +53,7 @@ class Namespace
   def get_all_pods_all_namespaces_all_envs
     channel = Channel(NamespacePodInformation).new
 
+    progress = ProgressIndicator.new("Querying nodes...")
     contexts.each do |ctx|
       spawn do
         str = String.build do |str|
@@ -90,6 +92,8 @@ class Namespace
       result = channel.receive
       results[result.ctx] = result.data
     end
+
+    progress.stop
 
     # output the results by context, in order
     contexts.each do |ctx|
