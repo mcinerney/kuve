@@ -8,17 +8,7 @@ require "json"
 # Have a command for a project (eg kubectl get pods --all-namespaces)
 # kubectl get events --namespace=balh
 
-if ARGV[0] == "nodes"
-  no = Nodes.new
-  no.get_all_nodes
-elsif ARGV[0] == "restarts"
-  a = Restarts.new
-  if (ARGV.size > 1) && (ARGV[1] == "-a" || ARGV[1] == "a")
-    a.show_all_restarts("all")
-  else
-    a.show_all_restarts("top")
-  end
-elsif ARGV[0] == "-h" || ARGV[0] == "h"
+if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts ""
   puts "*****************************************************************".colorize.yellow
   puts ""
@@ -32,12 +22,23 @@ elsif ARGV[0] == "-h" || ARGV[0] == "h"
   puts ""
   puts "*****************************************************************".colorize.yellow
   puts ""
+  puts "$ kuve -h              shows this message"
   puts "$ kuve <namespace>     shows all pods in a namespace for each project"
   puts "$ kuve restarts        shows top six pod restarts in namespace and node"
   puts "$ kuve restarts -a     shows all pod restarts in namespace and node"
   puts "$ kuve nodes           shows all warning and error messages for all nodes in a project"
   puts ""
   puts ""
+elsif ARGV[0] == "nodes"
+  no = Nodes.new
+  no.get_all_nodes
+elsif ARGV[0] == "restarts"
+  a = Restarts.new
+  if (ARGV.size > 1) && (ARGV[1] == "-a" || ARGV[1] == "a")
+    a.show_all_restarts("all")
+  else
+    a.show_all_restarts("top")
+  end
 else
   na = Namespace.new
   na.get_all_pods_all_namespaces_all_envs
