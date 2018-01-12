@@ -15,6 +15,7 @@ class ProgressIndicator
   end
 
   def run_loop
+    print "\033[?25l" # cursor off
     printf "  %s\r", @msg.colorize(:light_yellow)
 
     while @running
@@ -26,8 +27,8 @@ class ProgressIndicator
       print "\b"
     end
 
-    print "\033[2K" # erase line
-
+    print "\033[2K"   # erase line
+    print "\033[?25h" # cursor on
     @channel.send nil # signal stop that we're done
   end
 
