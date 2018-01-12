@@ -3,7 +3,7 @@
 require "colorize"
 
 class ProgressIndicator
-  GLYPHS = "|/-\\"
+  GLYPHS = "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
   COLORS = [:light_yellow, :light_blue, :blue, :white]
 
   def initialize(@msg : String)
