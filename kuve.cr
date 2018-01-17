@@ -9,18 +9,22 @@ require "json"
 # kubectl get events --namespace=balh
 
 if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
-  puts ""
-  puts "*****************************************************************".colorize.yellow
-  puts ""
-  puts "      :::    :::      :::    :::    :::     :::       ::::::::::".colorize.light_yellow
-  puts "     :+:   :+:       :+:    :+:    :+:     :+:       :+:        ".colorize.light_yellow
-  puts "    +:+  +:+        +:+    +:+    +:+     +:+       +:+         ".colorize.light_yellow
-  puts "   +#++:++         +#+    +:+    +#+     +:+       +#++:++#     ".colorize.yellow
-  puts "  +#+  +#+        +#+    +#+     +#+   +#+        +#+           ".colorize.yellow
-  puts " #+#   #+#       #+#    #+#      #+#+#+#         #+#            ".colorize.light_yellow
-  puts "###    ###       ########         ###           ##########      ".colorize.light_yellow
-  puts ""
-  puts "*****************************************************************".colorize.yellow
+  # puts ""
+  # puts "*****************************************************************".colorize.yellow
+  # puts ""
+  # puts "      :::    :::      :::    :::    :::     :::       ::::::::::".colorize.light_yellow
+  # puts "     :+:   :+:       :+:    :+:    :+:     :+:       :+:        ".colorize.light_yellow
+  # puts "    +:+  +:+        +:+    +:+    +:+     +:+       +:+         ".colorize.light_yellow
+  # puts "   +#++:++         +#+    +:+    +#+     +:+       +#++:++#     ".colorize.yellow
+  # puts "  +#+  +#+        +#+    +#+     +#+   +#+        +#+           ".colorize.yellow
+  # puts " #+#   #+#       #+#    #+#      #+#+#+#         #+#            ".colorize.light_yellow
+  # puts "###    ###       ########         ###           ##########      ".colorize.light_yellow
+  # puts ""
+  # puts "*****************************************************************".colorize.yellow
+  logo = AnimatedLogo.new
+  sleep 1
+  logo.stop
+
   puts ""
   puts "$ kuve -h              shows this message"
   puts "$ kuve <namespace>     shows all pods in a namespace for each project"
