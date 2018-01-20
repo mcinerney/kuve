@@ -1,6 +1,7 @@
 require "./namespaces.cr"
 require "./restarts.cr"
 require "./nodes.cr"
+require "./db-con.cr"
 require "colorize"
 require "json"
 
@@ -26,16 +27,24 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   logo.stop
 
   puts ""
-  puts "$ kuve -h              shows this message"
-  puts "$ kuve <namespace>     shows all pods in a namespace for each project"
-  puts "$ kuve restarts        shows top six pod restarts in namespace and node"
-  puts "$ kuve restarts -a     shows all pod restarts in namespace and node"
-  puts "$ kuve nodes           shows all warning and error messages for all nodes in a project"
+  puts "$ kuve -h                           shows this message"
+  puts "$ kuve <namespace>                  shows all pods in a namespace for each project"
+  puts "$ kuve restarts                     shows top six pod restarts in namespace and node"
+  puts "$ kuve restarts -a                  shows all pod restarts in namespace and node"
+  puts "$ kuve nodes                        shows all warning and error messages for all nodes in a project"
+  puts "$ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db"
   puts ""
   puts ""
 elsif ARGV[0] == "nodes"
   no = Nodes.new
   no.get_all_nodes
+elsif ARGV[0] == "db-con"
+  if ARGV[1] && ARGV[2]
+    d = DBCon.new(ARGV[1], ARGV[2])
+    d.proxy
+  else
+    puts "Needs to be like $ kuve db-con <project> <namespace>"
+  end
 elsif ARGV[0] == "restarts"
   a = Restarts.new
   if (ARGV.size > 1) && (ARGV[1] == "-a" || ARGV[1] == "a")
