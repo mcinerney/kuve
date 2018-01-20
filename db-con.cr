@@ -8,11 +8,11 @@ class DBCon
     service_account_directory = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["db-con"]["service_account_directory"]
     apps_directory = JSON.parse(File.open("/usr/local/bin/kuve_conf.json"))["db-con"]["apps_directory"]
 
-    puts "Connection string used: #{@project}:us-west:#{@namespace}"
+    puts "Connection string used: #{@project}:us-west1:#{@namespace}"
     puts "Secrets being decrypted: #{apps_directory}/#{@namespace}/config/deploy/#{@project}/secrets.ejson"
 
     app_decrypt = "#{apps_directory}/#{@namespace}/config/deploy/#{@project}/secrets.ejson"
-    db_conn_string = "#{@project}:us-west:#{@namespace}"
+    db_conn_string = "#{@project}:us-west1:#{@namespace}"
     full_service_account_directory = "#{service_account_directory}/#{@project}.json"
 
     system("ejson decrypt #{app_decrypt}")
