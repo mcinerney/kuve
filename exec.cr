@@ -4,6 +4,7 @@ class Exec
   end
 
   def exec_into_pod
+    system("kubectl config current-context")
     system("kubectl exec -it #{get_pod_name.chomp} -n #{@namespace} -- /bin/bash")
   end
 
