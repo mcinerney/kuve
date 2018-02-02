@@ -2,6 +2,7 @@ require "./namespaces.cr"
 require "./restarts.cr"
 require "./nodes.cr"
 require "./db-con.cr"
+require "./exec.cr"
 require "colorize"
 require "json"
 
@@ -33,11 +34,19 @@ if ARGV.size == 0 || ARGV[0] == "-h" || ARGV[0] == "h" || ARGV[0] == "--help"
   puts "$ kuve restarts -a                  shows all pod restarts in namespace and node"
   puts "$ kuve nodes                        shows all warning and error messages for all nodes in a project"
   puts "$ kuve db-con <project> <namespace> connects you to the cloud-sql-proxy for that namespace's db"
+  puts "$ kuve exec <namespace>             provides string to exec into pod"
   puts ""
   puts ""
 elsif ARGV[0] == "nodes"
   no = Nodes.new
   no.get_all_nodes
+elsif ARGV[0] == "exec"
+  if ARGV[1]
+    e = Exec.new(ARGV[1])
+    e.exec_into_pod
+  else
+    puts "You need to specify a namespace"
+  end
 elsif ARGV[0] == "db-con"
   if ARGV[1] && ARGV[2]
     d = DBCon.new(ARGV[1], ARGV[2])
