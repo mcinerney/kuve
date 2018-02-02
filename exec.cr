@@ -4,8 +4,13 @@ class Exec
   end
 
   def exec_into_pod
-    system("kubectl config current-context")
-    system("kubectl exec -it #{get_pod_name.chomp} -n #{@namespace} -- /bin/bash")
+    pod_name = get_pod_name.chomp
+    env = `kubectl config current-context`
+    puts "###### Running the following command in  #{env.chomp}  ######"
+    puts ""
+    puts "$ kubectl exec -it #{pod_name} -n #{@namespace} -- /bin/bash"
+    puts ""
+    system("kubectl exec -it #{pod_name} -n #{@namespace} -- /bin/bash")
   end
 
   def get_pod_name
