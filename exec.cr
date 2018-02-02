@@ -4,8 +4,7 @@ class Exec
   end
 
   def exec_into_pod
-    pod_name = get_pod_name.chomp
-    puts "kubectl exec -it #{pod_name} -n #{@namespace} -- /bin/bash"
+    system("kubectl exec -it #{get_pod_name.chomp} -n #{@namespace} -- /bin/bash")
   end
 
   def get_pod_name
