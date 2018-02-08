@@ -1,0 +1,22 @@
+{
+  "contexts": {
+    "default": [
+      "gcloud container clusters get-credentials production-environment --zone us-west1-a --project production",
+      "gcloud container clusters get-credentials staging-environment --zone us-west1-a --project staging",
+      "gcloud container clusters get-credentials sandbox-environment --zone us-west1-b --project sandbox",
+    ],
+    "add_more_contexts": [],
+  },
+  "rawcontexts": {
+    "default": [
+      "gke_production_us-west1-a_production-environment",
+      "gke_staging_us-west1-a_staging-environment",
+      "gke_sandbox_us-west1-b_sandbox-environment",
+    ],
+    "add_more_rawcontexts": [],
+  },
+  "db-con": {
+    "service_account_directory": "absolute-path-to-your-cloud-sql-service-accounts",
+    "apps_directory": "absolute-path-to-your-app-repos"
+  }
+}
