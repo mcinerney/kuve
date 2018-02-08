@@ -33,6 +33,7 @@ Easily view important debugging information over multiple environments.
 - You will need to add a directory with all psql-service-accounts.json - this is needed to connect to the proxy
 - Update the kuve_conf.json to include these two paths
 - If the db-con fails to run correctly, check that you have the repo cloned to the apps directory and that you have the service account for the project in the right directory
+- Database region is limited to us-west1 (TODO Fix)
 
 
 ## Todo
